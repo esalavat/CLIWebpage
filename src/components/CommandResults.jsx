@@ -9,8 +9,8 @@ const CommandResults = ({ command }) => {
     return (
         <>
             <CommandPrompt text={command} />
-            <div>
-                {resultString}
+            <div className="text-lg font-semibold font-mono w-full">
+                {resultString.split('\n').map(str => <p>{str}</p>)}
             </div>
         </>
     );
