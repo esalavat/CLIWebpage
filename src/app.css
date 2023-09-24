@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    @apply h-full;
+}
+
+body {
+    @apply h-full;
+}
+
+
+.caret {
+    background: #000;
+    color: white;
+    font-family: monospace;
+}
+
+.caret-block > span {
+    animation: blink 1s step-end infinite;
+    background-color: hsla(1, 1%, 100%, 1);
+    color: #000;
+}
+
+@keyframes blink {
+    from,
+    to {
+        background-color: transparent;
+    }
+    50% {
+        background-color: #fff;
+    }
+}
