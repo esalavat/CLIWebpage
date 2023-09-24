@@ -1,24 +1,30 @@
 import React, {useEffect, useState} from "react";
 
-const CommandInput = () => {
+const CommandInput = ({ submitCommand }) => {
     
-    const [value, setValue] = useState();
+    const [command, setCommand] = useState("");
 
     function handleChange(e) {
         e.preventDefault();
-        setValue(e.target.value);
+        setCommand (e.target.value);
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        submitCommand(command);
+        setCommand("");
     }
 
     return (
-        <div className="inline relative ml-1">
+        <form className="inline relative ml-1 w-full" onSubmit={handleSubmit}>
             <input type="text" 
-                className="bg-black focus:ring-0 outline-none text-white block-caret top-0 left-0 absolute"
+                className="bg-black focus:ring-0 outline-none text-white block-caret top-0 left-0 absolute w-full"
                 onChange={handleChange}
-                value={value}
+                value={command}
                 autoFocus
             />
-            <span className="p-0 caret caret-block absolute">{value}<span>&nbsp;</span></span>
-        </div>
+            <span className="whitespace-nowrap p-0 caret caret-block absolute">{command}<span>&nbsp;</span></span>
+        </form>
     );
 };
 
