@@ -4,21 +4,27 @@ import CommandResults from "components/CommandResults";
 
 const CLI = () => {
 
-    const [commands, setCommands] = useState([]);
+    const [commandHistory, setCommandHistory] = useState([]);
+    const [pwd, setPwd] = useState(0);
 
     function submitCommand(command) {
-        console.log(command);
-        setCommands((prev) => {
-            let newCommands = [...prev, command];
+        
+        const commandHistory = {
+            command: command,
+            pwd: pwd
+        };
+        
+        setCommandHistory((prev) => {
+            let newCommands = [...prev, commandHistory];
             return newCommands;
         });
     }
     
     return (
         <div className="px-4 py-2 w-full">
-            {commands.map((command, index) => {
+            {commandHistory.map((commandHistory, index) => {
                 return (
-                    <CommandResults command={command} key={index} />
+                    <CommandResults command={commandHistory.command} pwd={commandHistory.pwd} changePwd={setPwd} key={index} />
                 );
             })}
             <CommandPrompt submitCommand={submitCommand} />

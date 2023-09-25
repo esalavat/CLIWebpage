@@ -1,16 +1,13 @@
 import React from "react";
-import { getResultString } from "../lib/processCommand.js";
 import CommandPrompt from "components/CommandPrompt";
+import ResultString from "components/ResultString";
 
-const CommandResults = ({ command }) => {
-    
-    const resultString = getResultString(command);
-
+const CommandResults = ({ command, pwd, changePwd }) => {
     return (
         <>
             <CommandPrompt text={command} />
             <div className="text-lg font-semibold font-mono w-full">
-                {resultString.split('\n').map(str => <p>{str}</p>)}
+                <ResultString command={command} pwd={pwd} changePwd={changePwd} />
             </div>
         </>
     );
