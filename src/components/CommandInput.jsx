@@ -20,6 +20,7 @@ const CommandInput = ({ submitCommand }) => {
             <input type="text" 
                 className="bg-black focus:ring-0 outline-none text-white block-caret top-0 left-0 absolute w-full"
                 onChange={handleChange}
+                onBlur={(e) => {e.target.focus()}}
                 value={command}
                 autoFocus
             />

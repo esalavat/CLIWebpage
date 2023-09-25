@@ -9,12 +9,18 @@ export function getResultString(command, pwd, changeDir) {
 
         case "cd":
             return cd(split, pwd, changeDir);
-            
-        case "open":
-            return open(split);
 
         case "help":
             return help();
+    }
+
+    const file = files.filter(x => x.parent == pwd && x.type != "folder").find(x => "./"+x.name == split[0]);
+
+    console.log("getResultString", file);
+
+    if(file) {
+        open(file);
+        return "";
     }
 
     return `Command ${split[0]} not found.  Type help for a list of valid commands.`;
@@ -54,8 +60,15 @@ function cd(command, pwd, changeDir) {
     return "cd";
 }
 
-function open(command) {
-    return "open";
+function open(file) {
+    console.log("open: ", file);
+
+    if(file.url) {
+        window.location.href = file.url;
+        return;
+    }
+
+    window.location.href = file.name;
 }
 
 function help() {
@@ -65,6 +78,6 @@ function help() {
     string += " - ls: list directory contents\n";
     string += " - cd: change directory. Usage > cd dirname\n";
     string += " - help: display this help page\n";
-    string += " - open: open file.  Usage > open filname";
+    string += " - To open a file in the current directory you must use the following form: ./<filename>";
     return string;
 }
