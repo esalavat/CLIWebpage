@@ -5,7 +5,7 @@ import ResultString from "components/ResultString";
 const CommandResults = ({ command, pwd, changePwd }) => {
     return (
         <>
-            <CommandPrompt text={command} />
+            <CommandPrompt text={command} pwd={pwd} />
             <div className="text-lg font-semibold font-mono w-full">
                 <ResultString command={command} pwd={pwd} changePwd={changePwd} />
             </div>

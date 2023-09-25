@@ -26,6 +26,21 @@ export function getResultString(command, pwd, changeDir) {
     return `Command ${split[0]} not found.  Type help for a list of valid commands.`;
 }
 
+export function getPwdString(pwd) {
+    let string = "/";
+
+    console.log("pwd:", pwd);
+    let currentPwd = pwd;
+
+    while(currentPwd > 0) {
+        const dir = files.filter(x => x.id == currentPwd)[0];
+        string = "/" + dir.name + string;
+        currentPwd = dir.parent;
+    }
+
+    return string;
+}
+
 function ls(command, pwd) {
     
     let string = "./\n";

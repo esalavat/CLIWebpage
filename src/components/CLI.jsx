@@ -21,13 +21,13 @@ const CLI = () => {
     }
     
     return (
-        <div className="px-4 py-2 w-full">
+        <div className="px-4 py-2 w-full h-full overflow-scroll">
             {commandHistory.map((commandHistory, index) => {
                 return (
                     <CommandResults command={commandHistory.command} pwd={commandHistory.pwd} changePwd={setPwd} key={index} />
                 );
             })}
-            <CommandPrompt submitCommand={submitCommand} />
+            <CommandPrompt submitCommand={submitCommand} pwd={pwd} />
         </div>
     );
 }

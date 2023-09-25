@@ -1,5 +1,5 @@
 import React from "react";
-import { getResultString } from "../lib/processCommand.js";
+import { getResultString } from "../lib/filesRepo.js";
 
 const ResultString = ({ command, pwd, changePwd }) => {
 
