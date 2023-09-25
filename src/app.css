@@ -12,7 +12,7 @@ body {
 
 
 .caret {
-    background: #000;
+    background: #300A24;
     color: white;
     font-family: monospace;
 }
@@ -20,7 +20,7 @@ body {
 .caret-block > span {
     animation: blink 1s step-end infinite;
     background-color: hsla(1, 1%, 100%, 1);
-    color: #000;
+    color: #300A24;
 }
 
 @keyframes blink {

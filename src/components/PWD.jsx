@@ -6,7 +6,7 @@ const PWD = ({ pwd }) => {
     const pwdString = getPwdString(pwd);
 
     return (
-        <span className="text-blue-400">{pwdString}</span>
+        <span style={{color:"#08458F"}}>{pwdString}</span>
     );
 };
 
