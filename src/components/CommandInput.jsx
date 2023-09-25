@@ -16,16 +16,19 @@ const CommandInput = ({ submitCommand }) => {
     }
 
     return (
-        <form className="inline relative ml-1 w-full" onSubmit={handleSubmit}>
-            <input type="text" 
-                className="bg-black focus:ring-0 outline-none text-white block-caret top-0 left-0 absolute w-full"
-                onChange={handleChange}
-                onBlur={(e) => {e.target.focus()}}
-                value={command}
-                autoFocus
-            />
-            <span className="whitespace-nowrap p-0 caret caret-block absolute">{command}<span>&nbsp;</span></span>
-        </form>
+        <div className="inline ml-1 w-full relative">
+            <form className="inline" onSubmit={handleSubmit}>
+                <input type="text" 
+                    className="bg-black focus:ring-0 outline-none text-white block-caret top-0 absolute w-full"
+                    style={{left: "-10000px"}}
+                    onChange={handleChange}
+                    onBlur={(e) => {e.target.focus()}}
+                    value={command}
+                    autoFocus
+                />
+                <span className="whitespace-nowrap p-0 -left-2 caret caret-block relative">{command}<span>&nbsp;</span></span>
+            </form>
+        </div>
     );
 };
 
