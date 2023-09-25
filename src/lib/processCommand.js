@@ -1,7 +1,7 @@
 import files from "../data/files.json";
 
 export function getResultString(command, pwd, changeDir) {
-    const split = command.toLowerCase().split(" ");
+    const split = command.split(" ");
 
     switch(split[0]) {
         case "ls":
@@ -21,16 +21,29 @@ export function getResultString(command, pwd, changeDir) {
 }
 
 function ls(command, pwd) {
-    let string = files.filter(x => x.parent == pwd).map(x => x.name).join("\n");
-    console.log(string);
+    
+    let string = "./\n";
+ 
+    if(pwd > 0) {
+        string += "../\n";
+    }
+    
+    string += files.filter(x => x.parent == pwd).map(x => x.name + (x.type=="folder" ? "/" : "")).join("\n");
+    
     return string;
 }
 
 function cd(command, pwd, changeDir) {
     const folder = command[1];
 
+    if(folder == "..") {
+        changeDir(files.filter(x => x.id == pwd)[0].parent);
+        return "";
+    }
+
     const folders = files.filter(x => x.parent == pwd && x.type == "folder");
     const index = folders.map(x => x.name).indexOf(folder);
+
     if(index > -1) {
         changeDir(folders[index].id);
         return "";
