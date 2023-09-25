@@ -4,7 +4,7 @@ import CommandResults from "components/CommandResults";
 
 const CLI = () => {
 
-    const [commandHistory, setCommandHistory] = useState([]);
+    const [commandHistory, setCommandHistory] = useState([{command: "help", pwd: 0}]);
     const [pwd, setPwd] = useState(0);
 
     function submitCommand(command) {
