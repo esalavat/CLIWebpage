@@ -1,14 +1,12 @@
-import files from "../data/files.json";
-
-export function getResultString(command, pwd, changeDir) {
+export function getResultString(command, pwd, files, changeDir) {
     const split = command.split(" ");
 
     switch(split[0]) {
         case "ls":
-            return ls(split, pwd);
+            return ls(split, pwd, files);
 
         case "cd":
-            return cd(split, pwd, changeDir);
+            return cd(split, pwd, files, changeDir);
 
         case "help":
             return help();
@@ -26,7 +24,7 @@ export function getResultString(command, pwd, changeDir) {
     return `Command ${split[0]} not found.  Type help for a list of valid commands.`;
 }
 
-export function getPwdString(pwd) {
+export function getPwdString(pwd, files) {
     let string = "/";
 
     console.log("pwd:", pwd);
@@ -41,7 +39,7 @@ export function getPwdString(pwd) {
     return string;
 }
 
-function ls(command, pwd) {
+function ls(command, pwd, files) {
     
     let string = "./\n";
  
@@ -54,7 +52,7 @@ function ls(command, pwd) {
     return string;
 }
 
-function cd(command, pwd, changeDir) {
+function cd(command, pwd, files, changeDir) {
     const folder = command[1];
 
     if(folder == "..") {
