@@ -1,7 +1,7 @@
 export function getResultString(command, pwd, files, changeDir) {
     const split = command.split(" ");
 
-    switch(split[0]) {
+    switch(split[0].toLowerCase()) {
         case "ls":
             return ls(split, pwd, files);
 
@@ -12,9 +12,7 @@ export function getResultString(command, pwd, files, changeDir) {
             return help();
     }
 
-    const file = files.filter(x => x.parent == pwd && x.type != "folder").find(x => "./"+x.name == split[0]);
-
-    console.log("getResultString", file);
+    const file = files.filter(x => x.parent == pwd && x.type != "folder").find(x => "./"+x.name.toLowerCase() == split[0].toLowerCase());
 
     if(file) {
         open(file);
@@ -27,7 +25,6 @@ export function getResultString(command, pwd, files, changeDir) {
 export function getPwdString(pwd, files) {
     let string = "/";
 
-    console.log("pwd:", pwd);
     let currentPwd = pwd;
 
     while(currentPwd > 0) {
@@ -61,7 +58,7 @@ function cd(command, pwd, files, changeDir) {
     }
 
     const folders = files.filter(x => x.parent == pwd && x.type == "folder");
-    const index = folders.map(x => x.name).indexOf(folder);
+    const index = folders.map(x => x.name.toLowerCase()).indexOf(folder.toLowerCase());
 
     if(index > -1) {
         changeDir(folders[index].id);
