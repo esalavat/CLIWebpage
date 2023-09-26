@@ -30,6 +30,7 @@ const CLI = () => {
         
         const newCommandHistoryItem = {
             command: command,
+            pwd: pwd,
             results: getResultString(command, pwd, files, setPwd, clear)
         };
         
@@ -43,7 +44,7 @@ const CLI = () => {
         <div className="px-4 py-2 w-full h-full overflow-scroll">
             {commandHistory.map((commandHistory, index) => {
                 return (
-                    <CommandResults command={commandHistory.command} results={commandHistory.results} key={index} />
+                    <CommandResults command={commandHistory.command} results={commandHistory.results} pwd={commandHistory.pwd} files={files} key={index} />
                 );
             })}
             <CommandPrompt submitCommand={submitCommand} pwd={pwd} files={files} innerRef={promptRef} />
