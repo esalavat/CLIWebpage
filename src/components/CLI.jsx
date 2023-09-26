@@ -2,15 +2,20 @@ import React, { useEffect, useState, useRef } from "react";
 import CommandPrompt from "components/CommandPrompt";
 import CommandResults from "components/CommandResults";
 import useFiles from "../hooks/useFiles";
+import { getResultString } from "../lib/filesRepo.js";
 
 const CLI = () => {
 
-    const [commandHistory, setCommandHistory] = useState([{command: "help", pwd: 0}]);
+    const [commandHistory, setCommandHistory] = useState([]);
     const [pwd, setPwd] = useState(0);
-    const [files, filesLoading] = useFiles("./files.json");
+    const files = useFiles("./files.json");
 
     const promptRef = useRef(null);
 
+    useEffect(() => {
+        submitCommand("help");
+    },[]);
+    
     useEffect(() => {
         if(promptRef) {
             promptRef.current.scrollIntoView();
@@ -19,14 +24,14 @@ const CLI = () => {
 
     function submitCommand(command) {
         
-        const commandHistory = {
+        const newCommandHistoryItem = {
             command: command,
-            pwd: pwd
+            results: getResultString(command, pwd, files, setPwd)
         };
         
         setCommandHistory((prev) => {
-            let newCommands = [...prev, commandHistory];
-            return newCommands;
+            let newCommandHistory = [...prev, newCommandHistoryItem];
+            return newCommandHistory;
         });
     }
     
@@ -34,7 +39,7 @@ const CLI = () => {
         <div className="px-4 py-2 w-full h-full overflow-scroll">
             {commandHistory.map((commandHistory, index) => {
                 return (
-                    <CommandResults command={commandHistory.command} pwd={commandHistory.pwd} files={files} changePwd={setPwd} key={index} />
+                    <CommandResults command={commandHistory.command} results={commandHistory.results} key={index} />
                 );
             })}
             <CommandPrompt submitCommand={submitCommand} pwd={pwd} files={files} innerRef={promptRef} />

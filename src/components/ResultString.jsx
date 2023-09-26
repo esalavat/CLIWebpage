@@ -1,13 +1,9 @@
 import React from "react";
-import { getResultString } from "../lib/filesRepo.js";
 
-const ResultString = ({ command, pwd, files, changePwd }) => {
-
-    const resultString = getResultString(command, pwd, files, changePwd);
-
+const ResultString = ({ results }) => {
     return (
         <>
-            {resultString.split('\n').map(str => <p>{str}</p>)}
+            {results.split('\n').map(str => <p>{str}</p>)}
         </>
     );
 };

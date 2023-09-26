@@ -10,5 +10,5 @@ export default function useFiles(jsonUrl) {
             .then(json => setFiles(Object.values(json)))
     }, []);
  
-    return [files];
+    return files;
 }

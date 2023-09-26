@@ -71,14 +71,14 @@ function cd(command, pwd, files, changeDir) {
 }
 
 function open(file) {
-    console.log("open: ", file);
-
+    
     if(file.url) {
         window.location.href = file.url;
-        return;
+        return "";
     }
 
     window.location.href = file.name;
+    return "";
 }
 
 function help() {
@@ -86,7 +86,7 @@ function help() {
     string += "\n";
     string += "List of available commands:\n";
     string += " - ls: list directory contents\n";
-    string += " - cd: change directory. Usage > cd dirname\n";
+    string += " - cd: change directory. Usage: cd dirname\n";
     string += " - help: display this help page\n";
     string += " - To open a file in the current directory you must use the following form: ./<filename>";
     return string;
