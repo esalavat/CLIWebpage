@@ -22,11 +22,15 @@ const CLI = () => {
         }
     },[commandHistory]);
 
+    function clear() {
+        setCommandHistory([]);
+    }
+
     function submitCommand(command) {
         
         const newCommandHistoryItem = {
             command: command,
-            results: getResultString(command, pwd, files, setPwd)
+            results: getResultString(command, pwd, files, setPwd, clear)
         };
         
         setCommandHistory((prev) => {

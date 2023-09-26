@@ -1,4 +1,4 @@
-export function getResultString(command, pwd, files, changeDir) {
+export function getResultString(command, pwd, files, changeDir, clear) {
     const split = command.split(" ");
 
     switch(split[0].toLowerCase()) {
@@ -10,6 +10,10 @@ export function getResultString(command, pwd, files, changeDir) {
 
         case "help":
             return help();
+
+        case "clr":
+            clear();
+            return "";
     }
 
     const file = files.filter(x => x.parent == pwd && x.type != "folder").find(x => "./"+x.name.toLowerCase() == split[0].toLowerCase());
