@@ -26,6 +26,12 @@ const CLI = () => {
         setCommandHistory([]);
     }
 
+    function preventTab(event) {
+        if (event.keyCode === 9) {
+            event.preventDefault();
+        }
+    }
+
     function submitCommand(command) {
         
         const newCommandHistoryItem = {
@@ -41,7 +47,7 @@ const CLI = () => {
     }
     
     return (
-        <div className="px-4 py-2 w-full h-full overflow-scroll">
+        <div className="px-4 py-2 w-full h-full overflow-scroll" onKeyDown={preventTab}>
             {commandHistory.map((commandHistory, index) => {
                 return (
                     <CommandResults command={commandHistory.command} results={commandHistory.results} pwd={commandHistory.pwd} files={files} key={index} />

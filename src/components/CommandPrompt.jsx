@@ -10,7 +10,7 @@ const CommandPrompt = ({ submitCommand, text, pwd, files, innerRef }) => {
 
     return (
         <div className="text-lg font-semibold font-mono w-full" ref={innerRef}>
-            <User />:<PWD pwd={pwd} files={files} />$ {displayMode ? <CommandDisplay command={text} /> : <CommandInput submitCommand={submitCommand} />}
+            <User />:<PWD pwd={pwd} files={files} />$ {displayMode ? <CommandDisplay command={text} /> : <CommandInput submitCommand={submitCommand} pwd={pwd} files={files} />}
         </div>
     );
 };

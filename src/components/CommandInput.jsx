@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
+import { autoComplete } from "../lib/filesRepo";
 
-const CommandInput = ({ submitCommand }) => {
+const CommandInput = ({ submitCommand, pwd, files }) => {
     
     const [command, setCommand] = useState("");
 
@@ -21,8 +22,20 @@ const CommandInput = ({ submitCommand }) => {
         setCommand("");
     }
 
+    function handleKeydown(e) {
+        if (e.keyCode === 9) {
+            e.preventDefault();
+            
+            let autoCompleteString = autoComplete(command, pwd, files);
+            
+            if(autoCompleteString) {
+                setCommand(autoCompleteString); 
+            }
+        }
+    }
+
     return (
-        <div className="inline ml-1 w-full relative">
+        <div className="inline ml-1 w-full relative" onKeyDown={handleKeydown}>
             <form className="inline" onSubmit={handleSubmit}>
                 <input type="text" 
                     className="bg-black focus:ring-0 outline-none text-white block-caret top-0 absolute w-full"

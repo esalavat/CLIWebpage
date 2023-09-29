@@ -40,6 +40,40 @@ export function getPwdString(pwd, files) {
     return string;
 }
 
+export function autoComplete(string, pwd, files) {
+    if(string) {
+        const split = string.split(" ");
+        if(split[0].toLowerCase() == "cd") {
+            const match = findMatch(split[1], pwd, files);
+            if(match) {
+                return split[0] + " " + match;
+            }
+        }
+        
+        if(split[0].startsWith("./")) {
+            const match = findMatch(split[0].substring(2), pwd, files);
+            if(match) {
+                return "./" + match;
+            }
+        }
+    }
+
+    return null;
+}
+
+function findMatch(string, pwd, files) {
+    
+    let currentFiles = files.filter(x => x.parent == pwd);
+    
+    for(const file of currentFiles) {
+        if(file.name.toLowerCase().startsWith(string.toLowerCase())) {
+            return file.name;
+        }
+    };
+
+    return null;
+}
+
 function ls(command, pwd, files) {
     
     let string = "./\n";
