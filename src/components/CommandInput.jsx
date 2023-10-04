@@ -8,12 +8,24 @@ const CommandInput = ({ submitCommand, pwd, files }) => {
     const inputBoxRef = useRef(null);
 
     useEffect(() => {
-        setInterval(() => inputBoxRef.current.focus(), 100);
+        const interval = setInterval(() => inputBoxRef.current.focus(), 100);
+        window.addEventListener('click', handleClick);
+
+        // cleanup this component
+        return () => {
+            clearInterval(interval);
+            window.removeEventListener('click', handleClick);
+        };
     },[]);
 
     function handleChange(e) {
         e.preventDefault();
         setCommand (e.target.value);
+    }
+
+    function handleClick(e) {
+        e.preventDefault();
+        inputBoxRef.current.focus();
     }
 
     function handleSubmit(e) {
